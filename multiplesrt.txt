@@ -7,7 +7,7 @@
     */
 
    /* i.e : test.mp4 i have already one video file without any sub title */
-   $videoFile = "D:\\videoplayback.mp4"; 
+   $videoFile = "D:\\test.mp4"; 
    /* i.e : en.srt it is srt file for english langauage */
    $en_srtFile = "D:\\en.srt";
    /* i.e : gu.srt it is srt file for gujarati langauage */
@@ -17,10 +17,14 @@
    $en_commands = array(
         '-i '.$videoFile,
         '-i '.$en_srtFile,
-        '-map 0',
-        '-map 1',
-        '-c copy',
+        '-i '.$gu_srtFile,
         '-c:s mov_text',
+        '-c:v copy',
+        '-c:a copy',
+        '-map 0:v',
+        '-map 0:a',
+        '-map 1',
+        '-map 2',
         'D:\\en.mp4'
     );
 
@@ -36,15 +40,17 @@
     
     echo shell_exec($en_str);
     echo "en.mp4 file created.<br/>";
-    exit;
 
     $gu_commands = array(
         '-i '.$videoFile,
         '-i '.$gu_srtFile,
-        '-map 0',
-        '-map 1',
-        '-c copy',
         '-c:s mov_text',
+        '-c:v copy',
+        '-c:a copy',
+        '-map 0:v',
+        '-map 0:a',
+        '-map 1',
+        '-map 2',
         'D:\\gu.mp4'
     );
 
